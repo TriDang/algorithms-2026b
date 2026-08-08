@@ -1,0 +1,136 @@
+Problem 1 (2.5 points)
+
+Approach:
+- Compare the first element in list A with the first element in list B.
+- If they are equal, append the value to the common list and proceed to the second element of A and the second element of B.
+- If the element in list A < the element in list B, proceed to the next element of A.
+- If the element in list A > the element in list B, proceed to the next element of B.
+- Repeat until the end of either list is reached.
+
+Complexity: Each element in lists A and B is processed at most once. Therefore, the complexity is proportional to the total number of elements in the two lists: O(M + N).
+
+Pseudocode
+
+common_elements_list(A, B)
+idx_A = 0
+idx_B = 0
+result = []
+
+while (idx_A < len(A) and idx_B < len(B))
+    if (A[idx_A] == B[idx_B])
+        result.append(A[idx_A])
+        idx_A += 1
+        idx_B += 1
+    else if (A[idx_A] < B[idx_B])
+        idx_A += 1
+    else
+        idx_B += 1
+
+return result
+
+---------------------------------
+
+Problem 2 (2.5 points)
+
+for i = 0 to N - 1:              N times
+  for j = i + 1 to N - 1:       (N - i - 1) times
+    if A[i] == A[j]:            (N - i - 1) times
+      return True                1 time
+
+return False                       1 time
+
+Worst case: A[i] is never equal to A[j].
+
+Complexity = N + SUM(2 * (N - i - 1)) for i = 0 to N - 1
+           = N + 2((N - 1) + (N - 2) + ... + 2 + 1)
+           = N + N*(N - 1)
+           = N^2
+
+Therefore, the worst-case time complexity is O(N^2).
+
+Example input: [1, 2, 3, 4, 5, 6, 7]
+
+Best case: A[i] equals A[j] in the first comparison.
+
+Complexity = constant = O(1)
+
+Example input: [1, 1, 3, 4, 5, 6, 7]
+
+---------------------------------
+
+Problem 3 (2.5 points)
+
+The given pseudocode reverses the linked list.
+
+The two statements
+
+prev = curr
+curr = next_node
+
+advance prev and curr to the next positions.
+
+The statement
+
+curr.next = prev
+
+makes the "next" pointer of curr point to prev, thereby reversing the direction of the pointer.
+
+head is updated only at the end of the pseudocode.
+
+head -> A -> B -> C -> D -> E -> None
+
+Initially:
+
+prev = None
+curr = head
+
+#1
+prev = (A, A.next = None)
+curr = (B, B.next = C)
+
+#2
+prev = (B, B.next = A)
+curr = (C, C.next = D)
+
+#3
+prev = (C, C.next = B)
+curr = (D, D.next = E)
+
+#4
+prev = (D, D.next = C)
+curr = (E, E.next = None)
+
+#5
+prev = (E, E.next = D)
+curr = None
+
+Exit the while loop.
+
+head = E
+
+The reversed linked list is:
+
+head -> E -> D -> C -> B -> A -> None
+
+---------------------------------
+
+Problem 4 (2.5 points)
+
+        A
+       / \
+      B   C
+     / \   \
+    D   E   F
+       /   / \
+      G   H   I
+
+Q = [A(head, tail)]
+Q = [B(head), C(tail)]
+Q = [C(head), D, E(tail)]
+Q = [D(head), E, F(tail)]
+Q = [E(head), F(tail)]
+Q = [F(head), G(tail)]
+Q = [G(head), H, I(tail)]
+Q = [H(head), I(tail)]
+Q = [I(head, tail)]
+Q = []
